@@ -17,10 +17,13 @@
                 {{ article.body|raw|nl2br }}
             </div>
 
-            <div>
-                <a href="{{ path('app_article_edit', {'id': article.id}) }}">Редактировать</a>
-                Дата создания: {{ article.createdAt|date('d.m.Y H:i:s') }}
+            Дата создания: {{ article.createdAt|date('d.m.Y H:i:s') }}, Автор: {{ article.author }}
+
+            <p><div class="d-inline-flex">
+                <a class="btn btn-secondary" href="{{ path('app_article_edit', {'id': article.id}) }}">Редактировать</a>
+                {{ include('article/_delete_form.html.twig') }}
             </div>
+
         </article>
     {% endfor %}
 </div>
