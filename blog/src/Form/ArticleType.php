@@ -20,7 +20,7 @@ class ArticleType extends AbstractType
                 'label' => 'Название статьи',
                 'required' => true,
             ])
-            ->add('body', TextareaType::class,[
+            ->add('body', TextareaType::class, [
                 'label' => 'Текст статьи',
                 'required' => true,
             ])
