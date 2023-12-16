@@ -9,14 +9,16 @@
 </style>
 
 <div class="example-wrapper">
-    <a href="/login">Войти</a>
+    <a href="{{ path('admin.index') }}">Администрирование</a>
     {% for article in articles %}
         <article>
             <h2>{{ article.title }}</h2>
             <div class="article-content">
-                {{ article.body }}
+                {{ article.body|raw|nl2br }}
             </div>
+
             <div>
+                <a href="{{ path('app_article_edit', {'id': article.id}) }}">Редактировать</a>
                 Дата создания: {{ article.createdAt|date('d.m.Y H:i:s') }}
             </div>
         </article>

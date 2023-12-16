@@ -3,13 +3,14 @@
 {% block title %}Article index{% endblock %}
 
 {% block body %}
-    <h1>Article index</h1>
+    <a href="{{ path('app_article_new') }}">Создать статью</a>
+    <h1>Заголовок</h1>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Title</th>
+                <th>Заголовок</th>
                 <th>Body</th>
                 <th>CreatedAT</th>
                 <th>actions</th>
@@ -35,5 +36,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_article_new') }}">Create new</a>
+
 {% endblock %}

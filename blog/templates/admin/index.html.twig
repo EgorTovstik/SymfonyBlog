@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Админ!{% endblock %}
+
+{% block body %}
+
+    <p>
+        <a href="{{ path('app_article_new') }}" class="btn btn-default">Создать статью</a>
+    </p>
+    <p>
+        <a href="{{ path('home') }}" class="btn btn-default">Домой</a>
+    </p>
+
+
+    {{ app.user.email }} <a href="{{ path('app_logout') }}">Выйти</a>
+
+
+{% endblock %}
