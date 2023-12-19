@@ -13,7 +13,6 @@ class ArticleMessageHandler
 {
     public function __construct(
         private readonly LoggerInterface $logger,
-        private readonly MailerInterface $mailer,
     )
     {
     }
@@ -25,8 +24,6 @@ class ArticleMessageHandler
             $message->getTitle(),
             $message->isCreation() ? 'created' : 'updated'
         ));
-
-        //$this->mailer->send(...);
 
         sleep(3);
     }

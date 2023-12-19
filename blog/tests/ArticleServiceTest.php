@@ -36,8 +36,8 @@ class ArticleServiceTest extends TestCase
 
         $this->logger->expects($this->once())->method('info');
 
-        $articles = $service->getRecentArticles(3);
+        $article = $service->getRecentArticles(3);
 
-        $this->assertTrue(count($articles) === 3);
+        $this->assertTrue(count($article) === 3);
     }
 }
