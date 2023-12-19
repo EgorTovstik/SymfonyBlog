@@ -8,6 +8,7 @@ use App\Service\ArticleServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class HomeController extends AbstractController
 {
@@ -15,7 +16,6 @@ class HomeController extends AbstractController
     #[Route('/', name: 'home')]
     public function index(ArticleServiceInterface $articleService): Response
     {
-
         return $this->render('home/index.html.twig', [
             'articles' => $articleService->getRecentArticles(self::RECENT_ARTICLE_COUNT_ON_HOME),
         ]);

@@ -5,25 +5,47 @@ declare(strict_types=1);
 namespace App\EntityListener;
 
 use App\Entity\Article;
+use App\Message\ArticleNotification;
 use Doctrine\ORM\Event\PostPersistEventArgs;
 use Doctrine\Bundle\DoctrineBundle\Attribute\AsEntityListener;
 use Doctrine\ORM\Event\PrePersistEventArgs;
+use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Doctrine\ORM\Events;
 use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 #[AsEntityListener(event: Events::prePersist, method: 'prePersist', entity: Article::class)]
-
+#[AsEntityListener(event: Events::preUpdate, method: 'preUpdate', entity: Article::class)]
 class ArticleEntityListener
 {
-    public function __construct(private readonly Security $security)
+    public function __construct(
+        private readonly Security $security,
+        private readonly MessageBusInterface $bus,
+    )
     {
-
     }
-    public function prePersist(Article $article, PrePersistEventArgs $event): void
+    public function prePersist(\App\Entity\Article $entity): void
     {
-        /** @var Article $entity */
-        $entity = $event->getObject();
-        $entity->setCreatedAT(new \DateTimeImmutable());
-        $entity->setAuthor($this->security->getUser());
+        $entity->setCreatedAt(new \DateTimeImmutable())
+            ->setAuthor($this->security->getUser());
+
+        $this->bus->dispatch(new ArticleNotification(
+            $entity->getId(),
+            $entity->getTitle(),
+            $entity->getBody(),
+            $entity->getAuthor()->getId(),
+            true,
+        ));
+    }
+
+    public function preUpdate(\App\Entity\Article $entity, PreUpdateEventArgs $event): void
+    {
+        $this->bus->dispatch(new ArticleNotification(
+            $entity->getId(),
+            $entity->getTitle(),
+            $entity->getBody(),
+            $entity->getAuthor()->getId(),
+            false,
+        ));
     }
 }
