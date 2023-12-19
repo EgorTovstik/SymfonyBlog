@@ -3,6 +3,7 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/blog/src" isTestSource="false" packagePrefix="App\" />
+      <sourceFolder url="file://$MODULE_DIR$/blog/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/blog/tests" isTestSource="true" packagePrefix="App\Tests\" />
       <excludeFolder url="file://$MODULE_DIR$/blog/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/blog/vendor/doctrine/cache" />
@@ -131,6 +132,13 @@
       <excludeFolder url="file://$MODULE_DIR$/blog/vendor/twig/extra-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/blog/vendor/twig/twig" />
       <excludeFolder url="file://$MODULE_DIR$/blog/vendor/webmozart/assert" />
+      <excludeFolder url="file://$MODULE_DIR$/blog/vendor/babdev/pagerfanta-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/blog/vendor/easycorp/easyadmin-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/blog/vendor/pagerfanta/core" />
+      <excludeFolder url="file://$MODULE_DIR$/blog/vendor/pagerfanta/doctrine-orm-adapter" />
+      <excludeFolder url="file://$MODULE_DIR$/blog/vendor/pagerfanta/twig" />
+      <excludeFolder url="file://$MODULE_DIR$/blog/vendor/symfony/polyfill-uuid" />
+      <excludeFolder url="file://$MODULE_DIR$/blog/vendor/symfony/uid" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

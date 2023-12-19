@@ -8,6 +8,8 @@ use App\Dto\SearchDto;
 use App\Repository\ArticleRepository;
 use App\Service\ArticleService;
 use App\Service\ArticleServiceInterface;
+use Pagerfanta\Doctrine\ORM\QueryAdapter;
+use Pagerfanta\Pagerfanta;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\HttpFoundation\Request;
@@ -32,8 +34,18 @@ class HomeController extends AbstractController
             $query = $articleService->getRecentArticles(self::RECENT_ARTICLE_COUNT_ON_HOME);
         }
 
+        $pagerfanta = new Pagerfanta(
+            new QueryAdapter($query)
+        );
+
+        $pagerfanta->setMaxPerPage(2);
+
+        if ($request->query->has('page')) {
+            $pagerfanta->setCurrentPage((int) $request->query->get('page', 1));
+        }
+
         return $this->render('home/index.html.twig', [
-            'articles' => $query->getResult(),
+            'articles' => $pagerfanta,
             'form' => $form
         ]);
     }

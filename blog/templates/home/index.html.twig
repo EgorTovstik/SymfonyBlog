@@ -16,20 +16,19 @@
         <button class="btn btn-primary">Найти</button>
         {{ form_end(form) }}
 
-        {% for article in articles %}
+        {% for item in articles %}
             <article>
-                <h2>{{ article.title }}</h2>
+                <h2>{{ item.title }}</h2>
                 <div class="article-content">
-                    {{ article.body|raw|nl2br }}
+                    {{ item.body|raw|nl2br }}
                 </div>
-
-                Дата создания: {{ article.createdAt|date('d.m.Y H:i:s') }}, Автор: {{ article.author }}
-
-                <a class="btn btn-secondary" href="{{ path('app_article_edit', {'id': article.id}) }}">Редактировать</a>
-
+                Дата создания: {{ item.createdAt|date('d.m.Y H:i:s') }}, Автор: {{ item.author }}
+                <a class="btn btn-secondary" href="{{ path('app_article_edit', {'id': item.id}) }}">Редактировать</a>
             </article>
         {% else %}
             <div>Ничего не нашлось</div>
         {% endfor %}
+
+        {{ pagerfanta(articles) }}
     </div>
 {% endblock %}
