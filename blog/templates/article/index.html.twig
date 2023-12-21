@@ -1,40 +1,35 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Article index{% endblock %}
+{% block title %}Hello ArticleController!{% endblock %}
 
 {% block body %}
-    <a href="{{ path('app_article_new') }}">Создать статью</a>
-    <h1>Заголовок</h1>
+    <h1>{{ article.title }}</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Заголовок</th>
-                <th>Body</th>
-                <th>CreatedAT</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for article in articles %}
-            <tr>
-                <td>{{ article.id }}</td>
-                <td>{{ article.title }}</td>
-                <td>{{ article.body }}</td>
-                <td>{{ article.createdAT ? article.createdAT|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('app_article_show', {'id': article.id}) }}">show</a>
-                    <a href="{{ path('app_article_edit', {'id': article.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
+    <h4>Дата создания: {{ article.createdAt|date('d.m.Y H:i:s') }}, Автор: {{ article.author }}</h4>
+
+    <div class="article-content">
+        {{ article.body|raw|nl2br }}
+    </div>
+
+    <div>
+        <h5>Комментарии</h5>
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
         {% endfor %}
-        </tbody>
-    </table>
-
-
+        {# Форма комментариев #}
+        {{ form_start(form, {attr: {"class": "d-inline"}}) }}
+        {{ form_widget(form) }}
+        <button class="btn btn-primary">{{ button_label|default('Сохранить') }}</button>
+        {{ form_end(form) }}
+        {# Список комментариев #}
+        {% for item in article.comments|filter(v => v.isViewableByUsers) %}
+            <div class="comment">
+                {{ item.comment }}, Автор {{ item.displayAuthor }}
+            </div>
+        {% else %}
+            <div>Комментариев пока нет</div>
+        {% endfor %}
+    </div>
 {% endblock %}

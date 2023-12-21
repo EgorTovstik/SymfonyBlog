@@ -18,11 +18,8 @@
 
         {% for item in articles %}
             <article>
-                <h2>{{ item.title }}</h2>
-                <div class="article-content">
-                    {{ item.body|raw|nl2br }}
-                </div>
-                Дата создания: {{ item.createdAt|date('d.m.Y H:i:s') }}, Автор: {{ item.author }}
+                <h2><a href={{ path('article.show', {'article':item.id}) }}>{{ item.title }}</a></h2>
+                Дата создания: {{ item.createdAT|date('d.m.Y H:i:s') }}, Автор: {{ item.author }}
                 <a class="btn btn-secondary" href="{{ path('app_article_edit', {'id': item.id}) }}">Редактировать</a>
             </article>
         {% else %}
