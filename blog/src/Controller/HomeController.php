@@ -38,7 +38,7 @@ class HomeController extends AbstractController
             new QueryAdapter($query)
         );
 
-        $pagerfanta->setMaxPerPage(2);
+        $pagerfanta->setMaxPerPage(5);
 
         if ($request->query->has('page')) {
             $pagerfanta->setCurrentPage((int) $request->query->get('page', 1));

@@ -13,6 +13,8 @@
 
     <a href="{{ path('app_article_new') }}">Создать статью</a>
 
+    <a href="{{ path('home') }}">Домашняя страница</a>
+
     {% if app.user %}
         {{ app.user.email }} <a href="{{ path('app_logout') }}">Выйти</a>
     {% endif %}

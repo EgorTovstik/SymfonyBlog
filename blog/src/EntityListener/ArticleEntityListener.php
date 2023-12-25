@@ -31,7 +31,7 @@ class ArticleEntityListener
             ->setAuthor($this->security->getUser());
     }
 
-    public function postPersist(\App\Entity\Article $entity)
+    public function postPersist(\App\Entity\Article $entity): void
     {
         $this->bus->dispatch(new ArticleNotification(
             $entity->getId(),

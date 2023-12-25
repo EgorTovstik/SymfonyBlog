@@ -9,7 +9,16 @@
     </style>
 
     <div class="example-wrapper">
-        <a href="{{ path('admin.index') }}">Администрирование</a>
+        <div class="d-flex justify-content-between">
+            <a class="align-items-center" href="{{ path('app_profile') }}">Профиль</a>
+
+            <div class="d-flex justify-content-end align-items-center">
+                {% if app.user %}
+                    {{ app.user.email }} <a class="btn btn-primary" href="{{ path('app_logout') }}">Выйти</a>
+                {% endif %}
+            </div>
+        </div>
+
 
         {{ form_start(form, {attr: {"class": "d-inline"}}) }}
         {{ form_widget(form) }}
